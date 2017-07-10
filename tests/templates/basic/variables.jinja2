@@ -1,0 +1,208 @@
+{#
+These will raise exceptions, because they should be called inside resource() macros or providing `resource_type`
+as kwargs. Meanwhile we can't really compare output from them yet.
+
+{{ variable("name") }}
+
+{{ variable("name", "value") }}
+
+{{ variable("id", "${aws_security_group.group.id}") }}
+
+{{ variable("id", 37) }}
+
+{{ variable("name", "value", set_default=true) }}
+#}
+
+####################################
+# Value was set, so argument can not be parametrized and there should not be variable block
+####################################
+
+{{ reset_all_variables_and_outputs() }}
+
+# Terraform resource name as value
+# variable("security_group_id", "${aws_security_group.group.id}", resource_type="aws_security_group_rule")
+{{ variable("security_group_id", "${aws_security_group.group.id}", resource_type="aws_security_group_rule") }}
+
+# Formatting according to variable's type
+# aws_security_group name (string):
+# variable("name", "value", resource_type="aws_security_group")
+{{ variable("name", "value", resource_type="aws_security_group") }}
+
+# aws_security_group_rule cidr_blocks (list), given value as empty list:
+# variable("cidr_blocks", [], resource_type="aws_security_group_rule")
+{{ variable("cidr_blocks", [], resource_type="aws_security_group_rule") }}
+
+# aws_security_group_rule cidr_blocks (list), given value as list:
+# variable("cidr_blocks", ["10.20.30.40/32", "127.0.0.1/32"], resource_type="aws_security_group_rule")
+{{ variable("cidr_blocks", ["10.20.30.40/32", "127.0.0.1/32"], resource_type="aws_security_group_rule") }}
+
+# aws_security_group_rule cidr_blocks (list), given value as string:
+# variable("cidr_blocks", "10.20.30.40/32", resource_type="aws_security_group_rule")
+{{ variable("cidr_blocks", "10.20.30.40/32", resource_type="aws_security_group_rule") }}
+
+# Print variables. Should not output anything.
+{{ variables() }}
+
+####################################
+# Value was not set, so argument can be parametrized and there should be variable block
+####################################
+
+{{ reset_all_variables_and_outputs() }}
+
+# Omitting value should use terraform variable
+# variable("from_port", resource_type="aws_security_group_rule")
+{{ variable("from_port", resource_type="aws_security_group_rule") }}
+
+# aws_security_group_rule cidr_blocks (list), no value:
+# variable("cidr_blocks", resource_type="aws_security_group_rule")
+{{ variable("cidr_blocks", resource_type="aws_security_group_rule") }}
+
+# Print variables
+{{ variables() }}
+
+####################################
+# Meta arguments
+####################################
+
+{{ reset_all_variables_and_outputs() }}
+
+# Include variable's description and value
+# variable("vpc_id", "value", resource_type="aws_security_group", description="VPC ID")
+{{ variable("vpc_id", "value", resource_type="aws_security_group", description="VPC ID") }}
+
+# Print variables. Should not output anything.
+{{ variables() }}
+
+####################################
+# Enable default values
+####################################
+
+{{ reset_all_variables_and_outputs() }}
+
+# Set default value for variable (depending on type)
+# aws_security_group tags (map):
+# variable("tags", resource_type="aws_security_group", set_default=true)
+{{ variable("tags", resource_type="aws_security_group", set_default=true) }}
+
+# aws_security_group name (string):
+# variable("name", resource_type="aws_security_group", set_default=true)
+{{ variable("name", resource_type="aws_security_group", set_default=true) }}
+
+# aws_security_group cidr_blocks (list):
+# variable("cidr_blocks", resource_type="aws_security_group_rule", set_default=true)
+{{ variable("cidr_blocks", resource_type="aws_security_group_rule", set_default=true) }}
+
+# Print variables
+{{ variables() }}
+
+####################################
+# Disable default values
+####################################
+
+{{ reset_all_variables_and_outputs() }}
+
+# Do not set default value for variable
+# variable("tags", resource_type="aws_security_group", description="Tags for security group", set_default=false)
+{{ variable("tags", resource_type="aws_security_group", description="Tags for security group", set_default=false) }}
+
+# Print variables
+{{ variables() }}
+
+####################################
+# Only define_variable()
+####################################
+
+{{ reset_all_variables_and_outputs() }}
+
+# Define variable type string
+# define_variable("var1")
+{{ define_variable("var1") }}
+
+{{ variables() }}
+
+{{ reset_all_variables_and_outputs() }}
+
+# Define variable type string with default value in double quotes
+# define_variable("var2", default="\"user_data.sh\"")
+{{ define_variable("var2", default="\"user_data.sh\"") }}
+
+{{ variables() }}
+
+{{ reset_all_variables_and_outputs() }}
+
+# Define variable type list
+# define_variable("var_list", "list")
+{{ define_variable("var_list", "list") }}
+
+{{ variables() }}
+
+{{ reset_all_variables_and_outputs() }}
+
+# Define variable type boolean should either disable set_default or set boolean default value.
+# define_variable("var_boolean", "boolean", set_default=false)
+{{ define_variable("var_boolean", "boolean", set_default=false) }}
+
+{{ variables() }}
+
+{{ reset_all_variables_and_outputs() }}
+
+# Define variable type boolean with default value as boolean
+# define_variable("var_boolean_with_default_true", "boolean", default=true)
+# define_variable("var_boolean_with_default_false", "boolean", default=false)
+{{ define_variable("var_boolean_with_default_true", "boolean", default=true) }}
+{{ define_variable("var_boolean_with_default_false", "boolean", default=false) }}
+
+{{ variables() }}
+
+# This is incorrect, because boolean variables should either have set_default=false, default=false or default=true:
+# define_variable("var_boolean", "boolean")
+
+{{ reset_all_variables_and_outputs() }}
+
+# Define variable type map
+# define_variable("var_map", "map")
+{{ define_variable("var_map", "map") }}
+
+{{ variables() }}
+
+{{ reset_all_variables_and_outputs() }}
+
+# Define variable which with default value overridden
+# define_variable("var_map_overide", "map")
+# define_variable("var_map_overide", "map", default="{\"yo\" = \"man\", key = \"value\"}")
+{{ define_variable("var_map_overide", "map") }}
+{{ define_variable("var_map_overide", "map", default="{\"yo\" = \"man\", key = \"value\"}") }}
+
+{{ variables() }}
+
+{{ reset_all_variables_and_outputs() }}
+
+# Define variable without default value set
+# define_variable("var_list_no_default", "list", set_default=false)
+{{ define_variable("var_list_no_default", "list", set_default=false) }}
+
+{{ variables() }}
+
+{{ reset_all_variables_and_outputs() }}
+
+# Define variable type list with default value and set_default is fals
+# define_variable("var_list_with_default1", "list", default="[\"a\", \"b\"]", set_default=false)
+{{ define_variable("var_list_with_default1", "list", default="[\"a\", \"b\"]", set_default=false) }}
+
+{{ variables() }}
+
+{{ reset_all_variables_and_outputs() }}
+
+# Define variable type list with default value and set_default is true
+# define_variable("var_list_with_default2", "list", default="[\"a\", \"b\"]", set_default=true)
+{{ define_variable("var_list_with_default2", "list", default="[\"a\", \"b\"]", set_default=true) }}
+
+{{ variables() }}
+
+{{ reset_all_variables_and_outputs() }}
+
+# Define variable with default and description
+# define_variable("var_string_with_description_and_default", default="\"default-value\"", description="This is my description")
+{{ define_variable("var_string_with_description_and_default", default="\"default-value\"", description="This is my description") }}
+
+{{ variables() }}

@@ -1,0 +1,78 @@
+{
+  "name": "null",
+  "type": "provider",
+  "schema": {},
+  "resources": {
+    "null_resource": {
+      "triggers": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeMap"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    }
+  },
+  "data-sources": {
+    "null_data_source": {
+      "has_computed_default": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeMap"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeMap"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "random": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    }
+  }
+}

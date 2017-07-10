@@ -1,0 +1,3541 @@
+{
+  "name": "alicloud",
+  "type": "provider",
+  "schema": {
+    "access_key": [
+      {
+        "name": "Type",
+        "type": "schema.ValueType",
+        "value": "TypeString"
+      },
+      {
+        "name": "Required",
+        "type": "bool",
+        "value": "true"
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "value": "Access key of alicloud"
+      }
+    ],
+    "region": [
+      {
+        "name": "Type",
+        "type": "schema.ValueType",
+        "value": "TypeString"
+      },
+      {
+        "name": "Required",
+        "type": "bool",
+        "value": "true"
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "value": "Region of alicloud"
+      },
+      {
+        "name": "DefaultValue_Computed",
+        "type": "string",
+        "value": "cn-beijing"
+      }
+    ],
+    "secret_key": [
+      {
+        "name": "Type",
+        "type": "schema.ValueType",
+        "value": "TypeString"
+      },
+      {
+        "name": "Required",
+        "type": "bool",
+        "value": "true"
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "value": "Secret key of alicloud"
+      }
+    ]
+  },
+  "resources": {
+    "alicloud_db_instance": {
+      "allocate_public_connection": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeBool"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "false"
+        }
+      ],
+      "backup_retention_period": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "connections": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaInfo",
+          "value": {
+            "connection_string": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Required",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "ip_address": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "ip_type": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Required",
+                "type": "bool",
+                "value": "true"
+              }
+            ]
+          }
+        }
+      ],
+      "db_instance_class": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "db_instance_net_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "db_instance_storage": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "db_mappings": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeSet"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaInfo",
+          "value": {
+            "character_set_name": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Required",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "db_description": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "db_name": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Required",
+                "type": "bool",
+                "value": "true"
+              }
+            ]
+          }
+        }
+      ],
+      "engine": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "engine_version": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "instance_charge_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "Postpaid"
+        }
+      ],
+      "instance_network_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "master_user_name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "master_user_password": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "multi_az": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeBool"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "period": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "1"
+        }
+      ],
+      "port": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "preferred_backup_period": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaElements",
+          "value": [
+            {
+              "name": "Type",
+              "type": "schema.ValueType",
+              "value": "TypeString"
+            }
+          ]
+        }
+      ],
+      "preferred_backup_time": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "security_ips": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaElements",
+          "value": [
+            {
+              "name": "Type",
+              "type": "schema.ValueType",
+              "value": "TypeString"
+            }
+          ]
+        }
+      ],
+      "vswitch_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "zone_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_disk": {
+      "availability_zone": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "category": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "cloud"
+        }
+      ],
+      "description": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "size": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "snapshot_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "status": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "tags": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeMap"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_disk_attachment": {
+      "device_name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "disk_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "instance_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_eip": {
+      "bandwidth": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "5"
+        }
+      ],
+      "instance": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "internet_charge_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "PayByBandwidth"
+        }
+      ],
+      "ip_address": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "status": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_eip_association": {
+      "allocation_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "instance_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_ess_scaling_configuration": {
+      "active": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeBool"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "data_disk": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaInfo",
+          "value": {
+            "category": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "device": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "size": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "snapshot_id": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ]
+          }
+        }
+      ],
+      "enable": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeBool"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "image_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "instance_ids": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaElements",
+          "value": [
+            {
+              "name": "Type",
+              "type": "schema.ValueType",
+              "value": "TypeString"
+            }
+          ]
+        }
+      ],
+      "instance_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "internet_charge_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "internet_max_bandwidth_in": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "internet_max_bandwidth_out": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "io_optimized": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "scaling_configuration_name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "scaling_group_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "security_group_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "system_disk_category": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_ess_scaling_group": {
+      "db_instance_ids": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaElements",
+          "value": [
+            {
+              "name": "Type",
+              "type": "schema.ValueType",
+              "value": "TypeString"
+            }
+          ]
+        }
+      ],
+      "default_cooldown": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "300"
+        }
+      ],
+      "loadbalancer_ids": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaElements",
+          "value": [
+            {
+              "name": "Type",
+              "type": "schema.ValueType",
+              "value": "TypeString"
+            }
+          ]
+        }
+      ],
+      "max_size": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "min_size": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "removal_policies": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaElements",
+          "value": [
+            {
+              "name": "Type",
+              "type": "schema.ValueType",
+              "value": "TypeString"
+            }
+          ]
+        }
+      ],
+      "scaling_group_name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "vswitch_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_ess_scaling_rule": {
+      "adjustment_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "adjustment_value": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "ari": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "cooldown": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "scaling_group_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "scaling_rule_name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_ess_schedule": {
+      "description": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "launch_expiration_time": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "600"
+        }
+      ],
+      "launch_time": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "recurrence_end_time": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "recurrence_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "recurrence_value": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "scheduled_action": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "scheduled_task_name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "task_enabled": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeBool"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_forward_entry": {
+      "external_ip": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "external_port": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "forward_table_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "internal_ip": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "internal_port": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "ip_protocol": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_instance": {
+      "allocate_public_ip": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeBool"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "false"
+        }
+      ],
+      "availability_zone": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "description": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "host_name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "image_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "instance_charge_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "instance_name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "ECS-Instance"
+        }
+      ],
+      "instance_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "internet_charge_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "internet_max_bandwidth_in": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "internet_max_bandwidth_out": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "io_optimized": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "password": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "period": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "private_ip": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "public_ip": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "security_groups": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeSet"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaElements",
+          "value": [
+            {
+              "name": "Type",
+              "type": "schema.ValueType",
+              "value": "TypeString"
+            }
+          ]
+        }
+      ],
+      "status": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "subnet_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "system_disk_category": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "cloud"
+        }
+      ],
+      "system_disk_size": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "tags": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeMap"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "user_data": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "vswitch_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_nat_gateway": {
+      "bandwidth_package_ids": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "bandwidth_packages": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaInfo",
+          "value": {
+            "bandwidth": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Required",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "ip_count": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Required",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "public_ip_addresses": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "zone": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ]
+          }
+        }
+      ],
+      "description": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "forward_table_ids": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "snat_table_ids": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "spec": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "vpc_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_route_entry": {
+      "destination_cidrblock": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "nexthop_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "nexthop_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "route_table_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "router_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_security_group": {
+      "description": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "vpc_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_security_group_rule": {
+      "cidr_ip": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "ip_protocol": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "nic_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "policy": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "port_range": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "priority": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "security_group_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "source_group_owner_account": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "source_security_group_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Description",
+          "type": "string",
+          "value": "Type of rule, ingress (inbound) or egress (outbound)."
+        }
+      ]
+    },
+    "alicloud_slb": {
+      "address": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "bandwidth": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "instances": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeSet"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaElements",
+          "value": [
+            {
+              "name": "Type",
+              "type": "schema.ValueType",
+              "value": "TypeString"
+            }
+          ]
+        }
+      ],
+      "internet": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeBool"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "internet_charge_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "paybytraffic"
+        }
+      ],
+      "listener": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeSet"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaInfo",
+          "value": {
+            "bandwidth": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Required",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "cookie": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "cookie_timeout": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "health_check": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              },
+              {
+                "name": "Default",
+                "type": "interface {}",
+                "value": "off"
+              }
+            ],
+            "health_check_connect_port": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "health_check_domain": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "health_check_http_code": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "health_check_interval": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "health_check_timeout": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "health_check_type": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              },
+              {
+                "name": "Default",
+                "type": "interface {}",
+                "value": "tcp"
+              }
+            ],
+            "health_check_uri": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "healthy_threshold": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "instance_port": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Required",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "lb_port": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Required",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "lb_protocol": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Required",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "persistence_timeout": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              },
+              {
+                "name": "Default",
+                "type": "interface {}",
+                "value": "0"
+              }
+            ],
+            "scheduler": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              },
+              {
+                "name": "Default",
+                "type": "interface {}",
+                "value": "wrr"
+              }
+            ],
+            "ssl_certificate_id": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "sticky_session": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              },
+              {
+                "name": "Default",
+                "type": "interface {}",
+                "value": "off"
+              }
+            ],
+            "sticky_session_type": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "unhealthy_threshold": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ]
+          }
+        }
+      ],
+      "name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "vswitch_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_slb_attachment": {
+      "backend_servers": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "instances": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeSet"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaElements",
+          "value": [
+            {
+              "name": "Type",
+              "type": "schema.ValueType",
+              "value": "TypeString"
+            }
+          ]
+        }
+      ],
+      "slb_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_snat_entry": {
+      "snat_ip": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "snat_table_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "source_vswitch_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_subnet": {
+      "availability_zone": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "cidr_block": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "description": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "vpc_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_vpc": {
+      "cidr_block": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "description": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "router_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "router_table_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_vswitch": {
+      "availability_zone": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "cidr_block": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "description": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "vpc_id": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Required",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    }
+  },
+  "data-sources": {
+    "alicloud_images": {
+      "images": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaInfo",
+          "value": {
+            "architecture": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "creation_time": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "description": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "disk_device_mappings": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeList"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              },
+              {
+                "name": "Elem",
+                "type": "ResourceSchemaInfo",
+                "value": {
+                  "device": [
+                    {
+                      "name": "Type",
+                      "type": "schema.ValueType",
+                      "value": "TypeString"
+                    },
+                    {
+                      "name": "Computed",
+                      "type": "bool",
+                      "value": "true"
+                    }
+                  ],
+                  "size": [
+                    {
+                      "name": "Type",
+                      "type": "schema.ValueType",
+                      "value": "TypeString"
+                    },
+                    {
+                      "name": "Computed",
+                      "type": "bool",
+                      "value": "true"
+                    }
+                  ],
+                  "snapshot_id": [
+                    {
+                      "name": "Type",
+                      "type": "schema.ValueType",
+                      "value": "TypeString"
+                    },
+                    {
+                      "name": "Computed",
+                      "type": "bool",
+                      "value": "true"
+                    }
+                  ]
+                }
+              }
+            ],
+            "id": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "image_id": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "image_owner_alias": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "image_version": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "is_copied": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeBool"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "is_self_shared": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "is_subscribed": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeBool"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "is_support_io_optimized": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeBool"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "name": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "os_name": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "os_type": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "platform": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "product_code": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "progress": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "size": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "state": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "status": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "tags": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeMap"
+              },
+              {
+                "name": "Optional",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "usage": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ]
+          }
+        }
+      ],
+      "most_recent": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeBool"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Default",
+          "type": "interface {}",
+          "value": "false"
+        }
+      ],
+      "name_regex": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "owners": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_instance_types": {
+      "cpu_core_count": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeInt"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "instance_type_family": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "instance_types": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaInfo",
+          "value": {
+            "cpu_core_count": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeInt"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "family": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "id": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "memory_size": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeFloat"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ]
+          }
+        }
+      ],
+      "memory_size": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeFloat"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ]
+    },
+    "alicloud_regions": {
+      "current": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeBool"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "name": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "regions": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaInfo",
+          "value": {
+            "id": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "local_name": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "region_id": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "alicloud_zones": {
+      "available_disk_category": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "available_instance_type": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "available_resource_creation": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeString"
+        },
+        {
+          "name": "Optional",
+          "type": "bool",
+          "value": "true"
+        }
+      ],
+      "zones": [
+        {
+          "name": "Type",
+          "type": "schema.ValueType",
+          "value": "TypeList"
+        },
+        {
+          "name": "Computed",
+          "type": "bool",
+          "value": "true"
+        },
+        {
+          "name": "Elem",
+          "type": "ResourceSchemaInfo",
+          "value": {
+            "available_disk_categories": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeList"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              },
+              {
+                "name": "Elem",
+                "type": "ResourceSchemaElements",
+                "value": [
+                  {
+                    "name": "Type",
+                    "type": "schema.ValueType",
+                    "value": "TypeString"
+                  }
+                ]
+              }
+            ],
+            "available_instance_types": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeList"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              },
+              {
+                "name": "Elem",
+                "type": "ResourceSchemaElements",
+                "value": [
+                  {
+                    "name": "Type",
+                    "type": "schema.ValueType",
+                    "value": "TypeString"
+                  }
+                ]
+              }
+            ],
+            "available_resource_creation": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeList"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              },
+              {
+                "name": "Elem",
+                "type": "ResourceSchemaElements",
+                "value": [
+                  {
+                    "name": "Type",
+                    "type": "schema.ValueType",
+                    "value": "TypeString"
+                  }
+                ]
+              }
+            ],
+            "id": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ],
+            "local_name": [
+              {
+                "name": "Type",
+                "type": "schema.ValueType",
+                "value": "TypeString"
+              },
+              {
+                "name": "Computed",
+                "type": "bool",
+                "value": "true"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

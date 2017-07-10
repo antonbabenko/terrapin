@@ -1,0 +1,46 @@
+######
+###### main.tf
+######
+
+{% call resource("aws_security_group", "bastion") %}
+
+  {{ variable("name", description="Name of VPC") }}
+  {{ variable("vpc_id") }}
+
+  {% if include_description %}
+    description = "Bastion security group (only SSH inbound access is allowed)"
+  {% endif %}
+
+  {{ variable("tags") }}
+
+{% endcall %}
+
+
+{% call resource("aws_security_group_rule", "allow_outbound_all") %}
+
+  {{ variable("type", "egress") }}
+  {{ variable("from_port", 0) }}
+  {{ variable("to_port", 0) }}
+  {{ variable("protocol", "-1") }}
+
+  {{ variable("cidr_blocks", ["0.0.0.0/0"]) }}
+
+  {{ variable("security_group_id", "${aws_security_group.bastion.id}") }}
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
+{% endcall %}
+
+############
+# Variables
+############
+{{ variables() }}
+
+
+############
+# Outputs
+############
+{{ outputs() }}
+############

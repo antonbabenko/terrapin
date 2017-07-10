@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  build:
+    working_directory: /tf-module-generator
+
+    docker:
+
+      - image: antonbabenko/tf-module-generator:0.2
+        environment:
+          PYTHON_TF_MODULE_RESOURCES_DIR: /tf-module-generator/resources
+#          Set region for kitchen tests
+          AWS_REGION: eu-west-1
+
+    steps:
+      - checkout
+
+      - run:
+          name: Copy jinja2_terraform to Python modules directory
+          command: cp -Rf jinja2_terraform /usr/lib/python2.7/site-packages/
+
+      - run:
+          name: Run functional templates tests
+          command: ./bin/run_templates_tests.sh
+
+      - run:
+          name: Generate Terraform module from templates
+          command: ./bin/generate_module.sh --module aws_bastion_s3_keys
+
+# temporary disabling tests
+#      - run:
+#          name: Run integration tests
+#          command: ./bin/run_module_tests.sh --module aws_bastion_s3_keys
+
+      - store_artifacts:
+          path: ./output
+
+#      - type: store_test_results
+#        path: ./output

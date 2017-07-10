@@ -1,0 +1,11 @@
+# Arguments (variables):
+# type1 (String)={% get_argument('resource', 'aws_security_group', 'name', 'Type') %}
+# type2 (String)={% get_argument('data', 'aws_iam_server_certificate', 'name', 'Type') %}
+# type3 (Map)={% get_argument('resource', 'random_pet', 'keepers', 'Type') %}
+# type4 (Int)={% get_argument('resource', 'random_pet', 'length', 'Type') %}
+# type5 (List)={% get_argument('resource', 'random_shuffle', 'input', 'Type') %}
+
+# Attributes (outputs):
+# attr1={% get_attributes('resource', 'random_shuffle') %}
+# attr2={% get_attributes('data', 'aws_iam_server_certificate') %}
+

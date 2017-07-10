@@ -1,0 +1,11 @@
+{% call resource('aws_security_group', 'bastion') %}
+
+  {{ variable('name', description="Name of VPC") }}
+  {{ variable('vpc_id') }}
+  {{ variable('tags') }}
+
+{% endcall %}
+
+{{ variables() }}
+
+{{ outputs() }}

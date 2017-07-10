@@ -1,0 +1,220 @@
+{# All variables and all outputs to render #}
+{% set all_variables, all_outputs = {}, {} %}
+
+
+{# List of resource type (actually it should contain only one element - current resource type),
+which is used during lookup arguments #}
+{% set resource_type, data_type = [], [] %}
+
+
+{% macro resource(type, name) -%}
+    {#- Set resource type for future use during rendering of variable -#}
+    {%- do resource_type.append(type) -%}
+
+    {# Append resource to outputs #}
+    {%- do all_outputs.update({"resource." + type + "." + name: {}} ) -%}
+
+    resource "{{ type }}" "{{ name }}" {
+      {{- caller() -}}
+    }
+
+    {# Reset resource type and exit block #}
+    {%- do resource_type.remove(type) -%}
+{%- endmacro %}
+
+
+{% macro data(type, name) -%}
+    {#- Set data source type for future use during rendering of variable -#}
+    {%- do data_type.append(type) -%}
+
+    {# Append data source to outputs #}
+    {%- do all_outputs.update({"data." + type + "." + name: {}} ) -%}
+
+    data "{{ type }}" "{{ name }}" {
+      {{- caller() -}}
+    }
+
+    {# Reset data source type and exit block #}
+    {%- do data_type.remove(type) -%}
+{%- endmacro %}
+
+
+{#{{varargs}}#}
+{#{{kwargs}}#}
+{% macro variable(argument_name, argument_value) -%}
+
+    {% if kwargs["resource_type"] is defined or resource_type|length %}
+        {%- set this_type = kwargs["resource_type"]|default(resource_type|first) -%}
+        {%- set prefix_type = "resource" -%}
+    {% else %}
+        {%- set this_type = kwargs["data_type"]|default(data_type|first) -%}
+        {%- set prefix_type = "data" -%}
+    {% endif %}
+
+    {#- Get type of the argument from model -#}
+    {%- set argument_type %}
+        {%- get_argument(prefix_type, this_type, argument_name, 'Type') -%}
+    {%- endset -%}
+
+    {#- Apply format wrapper if the value was given -#}
+    {%- set apply_argument_value_wrapper = (argument_value is defined) -%}
+
+    {#- Add variable to variables block, if value was not specified -#}
+    {%- set add_to_variables = (argument_value is undefined) -%}
+
+    {#- Set default value wrapped as correct type -#}
+    {%- if argument_value is undefined -%}
+        {%- set argument_value = '"${var.%s}"'|format(argument_name) -%}
+    {%- endif -%}
+
+    {%- if argument_type == 'TypeString' -%}
+        {%- set variable_type = '' -%}
+        {%- set variable_default = '""' -%}
+        {%- if apply_argument_value_wrapper -%}
+            {%- set argument_value = '"%s"'|format(argument_value) -%}
+        {%- endif -%}
+    {%- elif argument_type == 'TypeInt' -%}
+        {%- set variable_type = '' -%}
+        {%- set variable_default = '""' -%}
+        {%- if apply_argument_value_wrapper -%}
+            {%- set argument_value = '%s'|format(argument_value) -%}
+        {% endif -%}
+    {%- elif argument_type == 'TypeBool' -%}
+        {%- set variable_type = '' -%}
+        {%- set variable_default = '' -%}
+        {%- if apply_argument_value_wrapper -%}
+            {%- set argument_value = '%s'|format(argument_value)|lower -%}
+        {% endif -%}
+    {%- elif argument_type in ['TypeList', 'TypeSet'] -%}
+        {%- set variable_type = 'list' -%}
+        {%- set variable_default = '[]' -%}
+        {%- if apply_argument_value_wrapper -%}
+            {%- if argument_value is string -%}
+                {%- set argument_value = '["%s"]'|format(argument_value) -%}
+            {%- else -%}
+                {# Terraform list values should be double quoted, but Python use single quote, so using tojson for this #}
+                {%- set argument_value = argument_value|tojson -%}
+            {%- endif -%}
+        {%- endif -%}
+    {%- elif argument_type == 'TypeMap' -%}
+        {%- set variable_type = 'map' -%}
+        {%- set variable_default = '{}' -%}
+        {%- if apply_argument_value_wrapper -%}
+            {%- set argument_value = '"%s"'|format(argument_value) -%}
+        {%- endif -%}
+    {%- else -%}
+        Unknown argument type: {{ argument_type }}
+    {%- endif -%}
+
+    {#- Store reference where argument_name was used only if value was not specified for this variable -#}
+    {%- do all_variables.update({
+    argument_name: {
+      "description": kwargs["description"]|default(""),
+      "resource_type": this_type,
+      "variable_type": variable_type|default(""),
+      "variable_default": variable_default|default(""),
+      "set_default": kwargs["set_default"]|default(True),
+      }
+    }) if add_to_variables -%}
+
+    {# Render result #}
+    {{ argument_name }} = {{ argument_value }}
+{%- endmacro %}
+
+{# Define variable, which will be defined only inside "variables" block
+(and not printed inside resource or data sources configs) #}
+{% macro define_variable(variable_name, argument_type = '') -%}
+
+    {%- if argument_type == 'boolean' -%}
+        {%- set variable_type = '' -%}
+        {% if kwargs["default"] is defined %}
+            {% if kwargs["default"] == true %}
+                {%- set variable_default = "true" -%}
+            {% else %}
+                {%- set variable_default = "false" -%}
+            {% endif %}
+            {% do kwargs.pop("default") %}
+        {% else %}
+          {%- set variable_default = '' -%}
+        {% endif %}
+    {%- elif argument_type == 'list' -%}
+        {%- set variable_type = 'list' -%}
+        {%- set variable_default = '[]' -%}
+    {%- elif argument_type == 'map' -%}
+        {%- set variable_type = 'map' -%}
+        {%- set variable_default = '{}' -%}
+    {%- else -%}
+        {%- set variable_type = '' -%}
+        {%- set variable_default = '""' -%}
+    {%- endif -%}
+
+    {#- Store reference where argument_name was used only if value was not specified for this variable -#}
+    {%- do all_variables.update({
+    variable_name: {
+      "description": kwargs["description"]|default(""),
+      "variable_type": variable_type|default(""),
+      "variable_default": kwargs["default"]|default(variable_default),
+      "set_default": kwargs["set_default"]|default(True),
+      }
+    }) -%}
+{%- endmacro %}
+
+
+{% macro variables() -%}
+{#####################}
+{## all_variables = {{ all_variables }}#}
+{#####################}
+{% for key, value in all_variables.iteritems()|sort %}
+variable "{{ key }}" {
+    {%- if value.variable_type %}
+        type = "{{ value.variable_type }}"
+    {% endif -%}
+
+    {%- if value.description %}
+        description = "{{ value.description }}"
+    {% endif -%}
+
+    {%- if value.set_default %}
+        default = {{ value.variable_default }}
+    {% endif -%}
+}
+{% endfor %}
+
+{%- endmacro %}
+
+
+{% macro outputs() -%}
+{#####################}
+{## all_outputs = {{ all_outputs }}#}
+{#####################}
+{% for key in all_outputs.iteritems()|sort %}
+    {% set output = key[0].split('.') %}
+
+    {% set prefix_type = output[0] %}
+    {% set type = output[1] %}
+    {% set full_model_name = output[1:] %}
+
+    {#- Get argument type from model -#}
+    {%- set attributes %}
+        {%- get_attributes(prefix_type, type) -%}
+    {%- endset -%}
+
+    {# Prefix data sources outputs correctly with "data" #}
+    {% set start_output_index = (prefix_type != "data") %}
+
+# {{ output[start_output_index:]|join(".") }}
+    {% for attribute in attributes.split(",") %}
+output "{{ full_model_name|join("_") }}_{{ attribute }}" {
+    value = "{{"${%s.%s}"|format(output[start_output_index:]|join("."), attribute)}}"
+}
+    {% endfor %}
+{% endfor %}
+
+{%- endmacro %}
+
+
+{# Reset variables and output (call between tests) #}
+{%- macro reset_all_variables_and_outputs() -%}
+    {%- do all_variables.clear() -%}
+    {%- do all_outputs.clear() -%}
+{%- endmacro -%}

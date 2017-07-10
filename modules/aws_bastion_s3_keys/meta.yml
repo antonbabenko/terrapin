@@ -1,0 +1,8 @@
+module: aws_bastion_s3_keys
+
+template: aws_module
+
+git_repo_split: git@github.com:terraform-community-modules/tf_aws_bastion_s3_keys.git
+
+include_examples_dir: examples
+include_docs_dir: docs

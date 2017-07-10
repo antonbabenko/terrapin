@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+source 'https://rubygems.org'
+
+group :testing do
+  gem 'awspec'
+  gem 'kitchen-terraform'
+  gem 'rake'
+end
