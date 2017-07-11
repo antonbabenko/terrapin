@@ -7,7 +7,7 @@ jobs:
 
       - image: antonbabenko/terrapin:0.1
         environment:
-          PYTHON_TF_MODULE_RESOURCES_DIR: /terrapin/resources
+          TERRAPIN_RESOURCES_DIR: /terrapin/resources
 #          Set region for kitchen tests
           AWS_REGION: eu-west-1
 

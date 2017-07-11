@@ -14,7 +14,7 @@ class TerraformExtension(Extension):
     # input example: "resource" "aws_security_group" "name" "Type"
     def _get_argument(self, prefix, type, name, argument):
 
-        data_dir = os.getenv('PYTHON_TF_MODULE_RESOURCES_DIR', '/Users/Bob/Sites/tf-module-generator/resources')
+        data_dir = os.getenv('TERRAPIN_RESOURCES_DIR', '/Users/Bob/Sites/terrapin/resources')
         data_dir = os.path.join(data_dir, 'providers')
 
         if prefix == 'resource':
@@ -55,7 +55,7 @@ class TerraformExtension(Extension):
     # input example: "resource" "aws_security_group"
     def _get_attributes(self, prefix, type):
 
-        data_dir = os.getenv('PYTHON_TF_MODULE_RESOURCES_DIR', '/Users/Bob/Sites/tf-module-generator/resources')
+        data_dir = os.getenv('TERRAPIN_RESOURCES_DIR', '/Users/Bob/Sites/terrapin/resources')
         data_dir = os.path.join(data_dir, 'providers_doc')
 
         if prefix == 'resource':
