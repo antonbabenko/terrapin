@@ -239,7 +239,7 @@ function create_archive {
 
   cd "$SCRIPT_PATH/../$dir"
 
-  zip -FS -r -9 "$SCRIPT_PATH/../tmp/${archive}" *
+  zip -FS -r -9 "$SCRIPT_PATH/../work/${archive}" *
 }
 
 function generate_module {
@@ -327,7 +327,7 @@ function generate_module {
 
   log "Generation complete!!!!"
 
-  log "Creating archive ./tmp/${module}.zip"
+  log "Creating archive ./work/${module}.zip"
   create_archive "$module_output_dir" "${module}.zip"
 
 #  log "Uploading archive to dev s3 bucket (environment)"

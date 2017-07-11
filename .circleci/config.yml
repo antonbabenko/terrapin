@@ -1,13 +1,13 @@
 version: 2
 jobs:
   build:
-    working_directory: /tf-module-generator
+    working_directory: /terrapin
 
     docker:
 
       - image: antonbabenko/tf-module-generator:0.2
         environment:
-          PYTHON_TF_MODULE_RESOURCES_DIR: /tf-module-generator/resources
+          PYTHON_TF_MODULE_RESOURCES_DIR: /terrapin/resources
 #          Set region for kitchen tests
           AWS_REGION: eu-west-1
 
