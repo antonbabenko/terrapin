@@ -5,7 +5,7 @@ jobs:
 
     docker:
 
-      - image: antonbabenko/tf-module-generator:0.2
+      - image: antonbabenko/terrapin:0.1
         environment:
           PYTHON_TF_MODULE_RESOURCES_DIR: /terrapin/resources
 #          Set region for kitchen tests
