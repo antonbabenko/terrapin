@@ -19,15 +19,21 @@ will create complete module inside `./output/modules/aws_bastion_s3_keys`.
 
 Terrapin is designed with a goal to generate canonical code for [terraform-community-modules](https://github.com/terraform-community-modules/). Read my blog post about [common traits in modules](https://medium.com/@anton.babenko/using-terraform-continuously-common-traits-in-modules-8036b71764db).
 
+Terrapin supports all types of providers available in Terraform 0.9.
+
 ## What Terrapin is NOT?
 
 It is not going to take your job (at least not yet). Developers should still design infrastructure components and understand how Terraform works.
 
 ## Then why should I use Terrapin?
 
-Using Terrapin developers focus on creating rather DRY template files, which is then used to generate the rest. All Terraform properties like variables, outputs, tfvars and defaults are generated from source templates, type of attributes is validated.
+Using Terrapin developers focus on creating rather DRY template files, which is then used to generate the rest (tests, documentation and examples). All Terraform properties like variables, outputs, tfvars and defaults are generated from source templates, type of attributes is validated.
 
 See code inside `modules/aws_bastion_s3_keys` for reference.
+
+## What does "terrapin" mean?
+
+Terrapin (wiki: [portable building](https://en.wikipedia.org/wiki/Portable_building)) is a type of prefabricated one-storey building for temporary use.
 
 ## Prerequisites
 
@@ -38,26 +44,20 @@ To run acceptance tests you will need to have Ruby 2.4+ with these gems: `test-k
 
 ## Getting started
 
-You know what Terrapin is you can read further or [start hacking](#start-hacking).
-
-/// ## Directories and files structure
-
 Source code of modules is inside `modules` directory. For example, single module is inside `modules/aws_bastion_s3_keys`  and source templates are inside `templates` directory. `meta.yml` is not in currently in use, so you can skip it. `templates` directory should contain at least one template file with extension `.tf.tpl`.
-
-## Getting started - where to change what
 
 ## Template syntax
 
-Terraform templates are being generating from Jinja templates, where [full power of Jinja](http://jinja.pocoo.org/docs/2.9/templates/) and several custom macros are available. For more detailed examples on usage of Jinja macros check tests in `tests/templates/basic`.
+Terraform templates are being produced from Jinja templates, where [full power of Jinja](http://jinja.pocoo.org/docs/2.9/templates/) and several custom macros are available. For more detailed examples on usage of Jinja macros check tests in `tests/templates/basic`.
 
 Jinja macros are inside `templates/macros/macros.jinja2`. There are there custom macros which developers should use in Jinja templates:
 
-* resource
-* data
-* variable
-* define_variable
-* variables
-* outputs
+* [resource](#-resourcetype-name-)
+* [data](#-datatype-name-)
+* [variable](#-variableargument_name--argument_value--description--default--set_default--resource_type--data_type-)
+* [define_variable](#-define_variablevariable_name--variable_type--description--default--set_default-)
+* [variables](#-variables-)
+* [outputs](#-outputs-)
  
 ### {{ resource(type, name) }}
 
@@ -108,12 +108,14 @@ resource "aws_security_group" "bastion" {
 ```
 
 Example 2 (set default value in `name` parameter, `name` is parametrized):
-```hcl-terraform
-{{ variable("name", default="bastion-vpc") }}
+```jinja2
+{% call resource("aws_security_group", "bastion") %}
+  {{ variable("name", default="bastion-vpc") }}
+{% endcall %}
 ```
 will render:
 ```hcl-terraform
-resource ... {
+resource "aws_security_group" "bastion" {
   name = "${var.name}"
 }
 
@@ -122,12 +124,14 @@ variable "name" {}
 ```
 
 Example 3 (set argument value, `name` can't be parametrized):
-```hcl-terraform
-{{ variable("name", "bastion-vpc") }}
+```jinja2
+{% call resource("aws_security_group", "bastion") %}
+  {{ variable("name", "bastion-vpc") }}
+{% endcall %}
 ```
 will render:
 ```hcl-terraform
-resource ... {
+resource "aws_security_group" "bastion" {
   name = "bastion-vpc"
 }
 
@@ -143,7 +147,6 @@ Notes:
        - boolean and integer: `${var.argument_name}`
        - string and map: `"${var.argument_name}"`
     1. `argument_name` will be appended to [Terraform's variables](https://www.terraform.io/docs/configuration/variables.html)
-
 
 ### {{ define_variable(variable_name [, variable_type] [, description=...] [, default=...] [, set_default=...]) }}
 
@@ -194,63 +197,19 @@ Generates [Terraform's outputs configuration](https://www.terraform.io/docs/conf
 
 This macros in explicitly invoked only in tests, but in real templates it is appended by helper script (such as `./bin/generate_module.sh`) and developers should not call it into templates.
 
-### Template composition
-
-
-## Complete example code
-
 ## Contribute code
-
-## Example with loops, ifs, etc
-
-## Limitations
-
-# Start hacking
 
 Terrapin currently has a bit more dependencies than it can have. The complete list of dependencies is inside `.circleci/images/antonbabenko/terrapin/Dockerfile`.
 
-## What does "terrapin" mean?
+Create directory `modules/YOUR_MODULE/templates/` and put your source template file (`main.tf.tpl`) there.
 
-Terrapin (wiki: [portable building](https://en.wikipedia.org/wiki/Portable_building)) is a type of prefabricated one-storey building for temporary use.
+Run `./bin/generate_module.sh --module YOUR_MODULE` and check content of `output/modules/YOUR_MODULE`.
 
-.....................................
-... @todo below ....
-.....................................
+Send pull-request to master branch of [https://github.com/antonbabenko/terrapin](https://github.com/antonbabenko/terrapin).
 
-## Content
+## Known limitations
 
-This repo contains code which generates Terraform modules (together with some important extras):
-
-* Terraform module code generator (shell scripts)
-* Jinja helpers and macros, which can be used inside terraform module templates
-* Terraform module templates (source)
-* Misc templates (readme, documentation, examples, tests, etc)
-* Auto-generated modules
-* Web-site (github pages from docs dir)
-
-## To-do for pre-release (open source)
-
-* Write static documentation describing all the process, structure, workflow
-* Write documentation describing generated modules and complete examples (AWS and not-AWS specifics)
-* Cleanup folders, merge previous commits and make it public
-
-An open-source tool for generating Terraform modules.
-Our goal is to provide a comprehensive and extensible framework for generating Terraform modules according to best-practices [*].
-
-## Key components include:
-
-1. Everything what user change often is located inside `modules` (see more "[Community managed modules](#community-managed-modules)")
-1. Terraform module generator internals:
-    1. Various templates in `templates` (docs, examples, macros, tests)
-    2. Extracted resources in `resources` (Terraform variables and outputs)
-
-# Community managed modules 
-
-* modules
-  * Template source: *.tf.tpl
-  * Module helpers (shell scripts or other files)
-* templates
-* tests/templates: templates functional tests
+1. There should be only one template file (eg, `main.tf.tpl`) per module.
 
 ## Credits
 
