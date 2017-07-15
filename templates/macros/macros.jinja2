@@ -123,9 +123,11 @@ which is used during lookup arguments #}
 
 {# Define variable, which will be defined only inside "variables" block
 (and not printed inside resource or data sources configs) #}
-{% macro define_variable(variable_name, argument_type = '') -%}
+{% macro define_variable(variable_name, variable_type) -%}
 
-    {%- if argument_type == 'boolean' -%}
+    {%- set type = variable_type|default('string')  %}
+
+    {%- if type == 'boolean' -%}
         {%- set variable_type = '' -%}
         {% if kwargs["default"] is defined %}
             {% if kwargs["default"] == true %}
@@ -137,13 +139,13 @@ which is used during lookup arguments #}
         {% else %}
           {%- set variable_default = '' -%}
         {% endif %}
-    {%- elif argument_type == 'list' -%}
+    {%- elif type == 'list' -%}
         {%- set variable_type = 'list' -%}
         {%- set variable_default = '[]' -%}
-    {%- elif argument_type == 'map' -%}
+    {%- elif type == 'map' -%}
         {%- set variable_type = 'map' -%}
         {%- set variable_default = '{}' -%}
-    {%- else -%}
+    {%- elif type == 'string' -%}
         {%- set variable_type = '' -%}
         {%- set variable_default = '""' -%}
     {%- endif -%}

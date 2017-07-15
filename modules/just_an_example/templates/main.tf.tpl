@@ -3,7 +3,9 @@
   {{ variable("name", description="Name of VPC") }}
   {{ variable("vpc_id") }}
 
-  {{ variable("description", "Bastion security group (only SSH inbound access is allowed)") }}
+  {% if include_description %}
+    description = "Bastion security group (only SSH inbound access is allowed)"
+  {% endif %}
 
   {{ variable("tags") }}
 
@@ -93,7 +95,7 @@
   {{ variable("max_size", "1") }}
   {{ variable("health_check_grace_period", "60") }}
   {{ variable("health_check_type", "EC2") }}
-  {{ variable("force_delete", false, set_default=false) }}
+  {{ variable("force_delete", false, set_default=false) }} {# @todo: do not render in variables() when static values are provided, because it is not customizable #}
 
   {{ variable("wait_for_capacity_timeout", "0") }}
   {{ variable("launch_configuration", "${aws_launch_configuration.bastion.name}") }}

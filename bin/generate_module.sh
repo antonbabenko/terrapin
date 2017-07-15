@@ -22,6 +22,9 @@ readonly TEMPLATES_DIR="templates"
 # Name of file with meta settings for the module
 readonly META_FILE="meta.yml"
 
+# String marker used to split single template into pieces
+readonly STRING_MARKER=$(date | md5)
+
 function print_usage {
   echo
   echo "Usage: $0 [OPTIONS]"
@@ -154,7 +157,12 @@ function compose_module_templates {
 
   # 3. append and prepend include statements to main.tf.tpl OR use jinja2 include/import in main.tf.tpl
   cd "$working_dir/$templates_dir"
-  echo -e "$(cat $SCRIPT_PATH/../templates/macros/macros.jinja2)\n$(cat main.tf.tpl)" > main.tf.tpl
+  echo -e "$(cat $SCRIPT_PATH/../templates/macros/macros.jinja2)
+$(cat main.tf.tpl)
+###${STRING_MARKER}_1###
+{{ variables() }}
+###${STRING_MARKER}_2###
+{{ outputs() }}" > main.tf.tpl
 
 }
 
@@ -187,7 +195,19 @@ function generate_templates {
 
     log "jinja2 --strict $tpl_file $include_features_file > $output_file"
 
-    jinja2 -e jinja2_terraform.TerraformExtension --strict "$tpl_file" "$include_features_file" > "$output_file"
+    jinja2 -e jinja2_terraform.TerraformExtension --strict "$tpl_file" $include_features_file > "$output_file"
+
+    # Move variables and outputs to separate tf files
+    pos1=$(sed -n "/###${STRING_MARKER}_1###/=" "$output_file")
+    pos2=$(sed -n "/###${STRING_MARKER}_2###/=" "$output_file")
+
+    if [[ -n "$pos1" && -n "$pos2" ]]; then
+      sed -n "$((${pos1}+1)),$((${pos2}-2))p" "$output_file" > "$output_dir/variables.tf"
+      sed -n "$((${pos2}+2)),\$p" "$output_file" > "$output_dir/outputs.tf"
+
+      # Delete them from main template
+      sed -i "${pos1},\$ d" "$output_file"
+    fi
 
     rm "$tpl_file"
   done

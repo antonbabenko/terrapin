@@ -1,8 +1,5 @@
 module: aws_bastion_s3_keys
 
-template: aws_module
+description: A Terraform module for creating bastion host on AWS EC2 and populate its ~/.ssh/authorized_keys with public keys from S3 bucket
 
 git_repo_split: git@github.com:terraform-community-modules/tf_aws_bastion_s3_keys.git
-
-include_examples_dir: examples
-include_docs_dir: docs
